@@ -11,18 +11,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
     <section id="demo">
-        <video style="display: none" autoplay width="1280" height="960" id="js-webcam"></video>
-        <canvas id="js-canvas" width="1280" height="960"></canvas>
+        <video style="display: none" autoplay width="640" height="480" id="js-webcam"></video>
+        <canvas id="js-canvas" width="640" height="480"></canvas>
     </section>
 
     <script>
         const video = document.getElementById('js-webcam');
         const canvas = document.getElementById('js-canvas');
-
-        const maxWidth = 640;
-        const maxHeight = 480;
-        const targetMaxWidth = 1280;
-        const targetMaxHeight = 960;
 
         // Store the resulting model in the global scope of our app.
         let model = undefined;
@@ -52,11 +47,10 @@
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
             predictions.forEach(prediction => {
-                const x = (prediction.bbox[0] / maxWidth) * targetMaxWidth;
-                const y = (prediction.bbox[1] / maxHeight) * targetMaxHeight;
-                const width = (prediction.bbox[2] / maxWidth) * targetMaxWidth;
-                const height = (prediction.bbox[3] / maxHeight) * targetMaxHeight;
-
+                const x = prediction.bbox[0];
+                const y = prediction.bbox[1];
+                const width = prediction.bbox[2];
+                const height = prediction.bbox[3];
                 // Draw the bounding box.
                 ctx.strokeStyle = "#2fff00";
                 ctx.lineWidth = 1;

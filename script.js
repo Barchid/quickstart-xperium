@@ -27,7 +27,7 @@ showDetection = (predictions) => {
     ctx.font = font;
     ctx.textBaseline = "top";
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+    
     predictions.forEach(prediction => {
         const x = prediction.bbox[0];
         const y = prediction.bbox[1];
